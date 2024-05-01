@@ -10,11 +10,13 @@ export default [
     input: "src/index.ts",
     output: [
       {
+        banner: '"use client"',
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
       },
       {
+        banner: '"use client"',
         file: packageJson.module,
         format: "esm",
         sourcemap: true,
