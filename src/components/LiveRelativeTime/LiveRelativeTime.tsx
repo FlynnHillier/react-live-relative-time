@@ -16,7 +16,7 @@ const TIMES = {
 /**
  * Display a message that references the given timestamp relative to the current moment.
  *
- * @param \{timestamp} the time to reference, given in epoch format.
+ * @param \{timestamp} the time to reference, given in ms-epoch format.
  */
 export default function LiveRelativeTime({ timestamp }: { timestamp: number }) {
   const [interval, setInterval] = useState<number | null>(null);

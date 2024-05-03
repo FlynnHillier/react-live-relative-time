@@ -1,8 +1,8 @@
 {
   "name": "react-live-relative-time",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "author": "flynnhillier",
-  "description": "A react component that display's text that describes a given epoch timestamp relative to the current moment, updated in real-time.",
+  "description": "A react component that display's text that describes a given ms-epoch timestamp relative to the current moment, updated in real-time.",
   "license": "MIT",
   "scripts": {
     "dev": "rollup -c --watch",
