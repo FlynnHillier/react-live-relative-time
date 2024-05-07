@@ -9,7 +9,7 @@
   <img alt="Downloads" src="https://img.shields.io/npm/d18m/react-live-relative-time.svg" />
 </p>
 
-> A react component that display's text that describes a given ms-epoch timestamp relative to the current moment, updated in real-time.
+> A super-lightweight react component library that displays text that describes a given ms-epoch timestamp relative to the current moment, updated in real-time.
 
 ### 🏠 [Homepage](https://github.com/FlynnHillier/react-live-relative-time#readme)
 
@@ -18,6 +18,7 @@
 ```sh
 npm i react-live-relative-time
 ```
+
 ## Usage
 
 ```tsx
@@ -75,6 +76,7 @@ export default function App() {
 The description provided will always reference the timestamp using the largest possible unit, given the amount of time between now and the provided timestamp.
 
 The units used are:
+
 - second
 - minute
 - hour
@@ -83,6 +85,11 @@ The units used are:
 - month
 - year
 
+## Footprint
+
+The library does not utilise any external packages, this way we can maintain a miniscule bundle size.
+
+To achieve relative time formatting, no use of packages such as _moment.js_ or similar are used; instead this package makes use of javascript's built-in `Intl.RelativeTimeFormat()` constructor to handle string formatting.
 
 ## Author
 

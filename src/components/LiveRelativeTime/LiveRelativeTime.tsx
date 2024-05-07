@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useState } from "react";
-import { useInterval } from "usehooks-ts";
 
 type TimeUnit = Exclude<Intl.RelativeTimeFormatUnitSingular, "quarter">;
 
@@ -19,7 +18,7 @@ const TIMES = {
  * @param \{timestamp} the time to reference, given in ms-epoch format.
  */
 export default function LiveRelativeTime({ timestamp }: { timestamp: number }) {
-  const [interval, setInterval] = useState<number | null>(null);
+  const [intervalDelay, setIntervalDelay] = useState<number | null>(null);
   const [message, setMessage] = useState<String>();
 
   const refreshTime = useCallback(() => {
@@ -41,7 +40,7 @@ export default function LiveRelativeTime({ timestamp }: { timestamp: number }) {
         ? "minute"
         : "second";
 
-    setInterval(DIFF < 0 ? TIMES[UNIT] - (ABS_DIFF % TIMES[UNIT]) : ABS_DIFF % TIMES[UNIT]);
+    setIntervalDelay(DIFF < 0 ? TIMES[UNIT] - (ABS_DIFF % TIMES[UNIT]) : ABS_DIFF % TIMES[UNIT]);
 
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
     setMessage(
@@ -53,13 +52,21 @@ export default function LiveRelativeTime({ timestamp }: { timestamp: number }) {
     refreshTime();
 
     return () => {
-      setInterval(null);
+      setIntervalDelay(null);
     };
   }, []);
 
-  useInterval(() => {
-    refreshTime();
-  }, interval);
+  useEffect(() => {
+    if (intervalDelay === null) return;
+
+    const intervalID = setInterval(() => {
+      refreshTime();
+    }, intervalDelay);
+
+    return () => {
+      clearInterval(intervalID);
+    };
+  }, [intervalDelay]);
 
   return <>{message}</>;
 }
