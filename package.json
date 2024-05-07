@@ -1,6 +1,6 @@
 {
   "name": "react-live-relative-time",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "author": "flynnhillier",
   "description": "A react component that display's text that describes a given ms-epoch timestamp relative to the current moment, updated in real-time.",
   "license": "MIT",

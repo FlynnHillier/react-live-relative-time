@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from "react";
 
 type TimeUnit = Exclude<Intl.RelativeTimeFormatUnitSingular, "quarter">;
 
+const MAX_32_BIT = 2147483647 as const;
+
 const TIMES = {
   second: 1000,
   minute: 60000,
@@ -40,7 +42,11 @@ export default function LiveRelativeTime({ timestamp }: { timestamp: number }) {
         ? "minute"
         : "second";
 
-    setIntervalDelay(DIFF < 0 ? TIMES[UNIT] - (ABS_DIFF % TIMES[UNIT]) : ABS_DIFF % TIMES[UNIT]);
+    const ACCURATE_DELAY =
+      DIFF < 0 ? TIMES[UNIT] - (ABS_DIFF % TIMES[UNIT]) : ABS_DIFF % TIMES[UNIT];
+
+    // intervals convert numner to signed 32 bit integer, hence to prevent wrapping to negative (0ms intervals) numbers, we choose minimum of two
+    setIntervalDelay(Math.min(MAX_32_BIT, ACCURATE_DELAY));
 
     const rtf = new Intl.RelativeTimeFormat("en", { numeric: "auto" });
     setMessage(
