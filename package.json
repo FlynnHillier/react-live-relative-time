@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/FlynnHillier/react-live-relative-time#readme",
   "devDependencies": {
-    "@babel/preset-typescript": "^7.23.0",
+    "@babel/preset-typescript": "7.23.2",
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.2.1",
     "@rollup/plugin-typescript": "^11.1.4",
